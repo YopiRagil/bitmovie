@@ -29,6 +29,12 @@ export default function movieReducer(movieState = initialState, action) {
         },
         save: action.save,
       };
+    case 'RESET_MOVIE':
+      return {
+        ...movieState,
+        isLoading: false,
+        movies: null,
+      };
     case 'SET_DETAIL':
       return {
         ...movieState,

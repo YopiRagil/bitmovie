@@ -16,7 +16,6 @@ export const getMovieAll = (page = 1, keyword = null, type) => {
           }&page=${page}`
       )
       .then((response) => {
-        console.log(response, page);
         if (page === 1) {
           dispatch({
             type: 'MOVIE_LIST',
@@ -40,7 +39,9 @@ export const getMovieAll = (page = 1, keyword = null, type) => {
         }
       })
       .catch((err) => {
-        console.log(err);
+        dispatch({
+          type: 'RESET_MOVIE',
+        });
       });
   };
 };

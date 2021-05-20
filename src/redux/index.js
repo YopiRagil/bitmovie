@@ -6,8 +6,6 @@ const rootReducer = combineReducers({
   movie: movieReducer,
 });
 const store = createStore(rootReducer, applyMiddleware(thunk));
-store.subscribe(() => {
-  // console.log(store.getState());
-});
+store.subscribe(() => {});
 
 export default store;

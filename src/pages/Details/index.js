@@ -2,10 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol, MDBTypography } from 'mdbreact';
 
+const styles = {
+  main: { backgroundColor: 'black', minHeight: '900px' },
+};
 const Details = (props) => {
-  console.log(props);
   return (
-    <div style={{ backgroundColor: 'black', minHeight: '900px' }}>
+    <div style={styles.main}>
       <MDBContainer fluid className="pt-5 pb-5">
         <MDBRow>
           <MDBCol size="12" sm="6" xl="4" lg="5" md="6">

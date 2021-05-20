@@ -3,7 +3,7 @@ import { getMovieAll, setDetails } from '../../redux/actions/movieActions';
 import { connect } from 'react-redux';
 import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import { NavbarPage, CardExample, AnimationPage } from '../../components';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const Home = (props) => {
   const getMovieList = async () => {
@@ -14,22 +14,22 @@ const Home = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const getNextData = async () => {
-    await props.getMovieAll(
-      props.save.page + 1,
-      props.save.keyword,
-      props.save.type
-    );
+    if (props?.save?.page) {
+      await props.getMovieAll(
+        props.save.page + 1,
+        props.save.keyword,
+        props.save.type
+      );
+    }
   };
-  console.log(props.movies);
   return (
-    <div style={{}}>
-      <NavbarPage setSearch={(e, type) => props.getMovieAll(e, type)} />
+    <div id="nextdatawillget">
+      <NavbarPage setSearch={(e, type) => props.getMovieAll(1, e, type)} />
       <InfiniteScroll
-        dataLength={100}
-        next={getNextData}
-        inverse={true}
-        hasMore={true}
-        scrollThreshold="100%"
+        pageStart={1}
+        loadMore={getNextData}
+        hasMore={props.movies?.totalResults > props.movies?.Search?.length}
+        useWindow={true}
       >
         <MDBContainer
           fluid
@@ -38,20 +38,36 @@ const Home = (props) => {
         >
           <AnimationPage isLoading={props.isLoading} />
           <MDBRow>
-            {props.movies?.Search?.map((item, index) => (
-              <MDBCol
-                className="mb-3"
-                key={index}
-                size="6"
-                sm="6"
-                md="4"
-                lg="4"
-                xl="3"
+            {props.movies?.Search?.length > 0 ? (
+              props.movies?.Search?.map((item, index) => (
+                <MDBCol
+                  className="mb-3"
+                  key={index}
+                  size="6"
+                  sm="6"
+                  md="4"
+                  lg="4"
+                  xl="3"
+                >
+                  <CardExample {...props} datas={item} />
+                </MDBCol>
+              ))
+            ) : (
+              <div
+                className="d-flex justify-content-center"
+                style={{ height: '1000px', width: '100%' }}
               >
-                <CardExample {...props} datas={item} />
-              </MDBCol>
-            ))}
+                <div>
+                  <h2 style={{ color: 'white' }}>No File Found !</h2>
+                </div>
+              </div>
+            )}
           </MDBRow>
+          {props?.save?.page === null ? (
+            <div>
+              <p>Max</p>
+            </div>
+          ) : null}
         </MDBContainer>
       </InfiniteScroll>
     </div>

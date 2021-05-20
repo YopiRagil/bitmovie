@@ -26,10 +26,12 @@ const NavbarPage = (props) => {
   const handleSetSearch = async (e) => {
     setSearch(e.target.value)
     if(e.target.value.length >=3){
-      await props.setSearch(1, e.target.value, type)
+      await props.setSearch(e.target.value, type)
+    } else if(e.target.value.length === 0){
+      await props.setSearch(e.target.value, type)
     }
     if(e.key === 'Enter'){
-      await props.setSearch(1, e.target.value, type)
+      await props.setSearch(e.target.value, type)
     }
   }
   
