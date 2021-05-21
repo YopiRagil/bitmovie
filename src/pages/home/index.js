@@ -29,7 +29,10 @@ const Home = (props) => {
   };
   return (
     <div id="nextdatawillget">
-      <NavbarPage setSearch={(e, type) => props.getMovieAll(1, e, type)} />
+      <NavbarPage
+        {...props}
+        setSearch={(e, type) => props.getMovieAll(1, e, type)}
+      />
       <InfiniteScroll
         pageStart={1}
         loadMore={getNextData}
