@@ -1,5 +1,5 @@
 # Task
-### Clone Projek
+### Clone Projek di Branch Main
 ```js
 git clone https://github.com/YopiRagil/bitmovie.git
 ```
