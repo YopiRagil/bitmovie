@@ -5,6 +5,11 @@ import { MDBContainer, MDBRow, MDBCol } from 'mdbreact';
 import { NavbarPage, CardExample, AnimationPage } from '../../components';
 import InfiniteScroll from 'react-infinite-scroller';
 
+const styles = {
+  no_data: { height: '1000px', width: '100%' },
+  containers: { backgroundColor: 'black' },
+  text_no_file: { color: 'white' },
+};
 const Home = (props) => {
   const getMovieList = async () => {
     await props.getMovieAll();
@@ -31,11 +36,7 @@ const Home = (props) => {
         hasMore={props.movies?.totalResults > props.movies?.Search?.length}
         useWindow={true}
       >
-        <MDBContainer
-          fluid
-          className="pt-5 pb-5"
-          style={{ backgroundColor: 'black' }}
-        >
+        <MDBContainer fluid className="pt-5 pb-5" style={styles.containers}>
           <AnimationPage isLoading={props.isLoading} />
           <MDBRow>
             {props.movies?.Search?.length > 0 ? (
@@ -55,10 +56,10 @@ const Home = (props) => {
             ) : (
               <div
                 className="d-flex justify-content-center"
-                style={{ height: '1000px', width: '100%' }}
+                style={styles.no_data}
               >
                 <div>
-                  <h2 style={{ color: 'white' }}>No File Found !</h2>
+                  <h2 style={styles.text_no_file}>No File Found !</h2>
                 </div>
               </div>
             )}

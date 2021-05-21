@@ -24,6 +24,7 @@ const styles = (props)=> {
             color:'white', 
             fontSize: 'calc(0.8vw + 1vh)'
         },
+        posters:{width:'100%'}
     })
 }
 
@@ -44,7 +45,7 @@ const CardExample = (props) => {
             </MDBCardBody>
             <MDBModal isOpen={openModal}>
                 <MDBModalBody className="bg-dark">
-                    <img style={{width:'100%'}} alt="poster" src={datas.Poster}/>
+                    <img style={styles().posters} alt="poster" src={datas.Poster}/>
                 </MDBModalBody>
                 <MDBFooter className="bg-dark pb-2">
                     <MDBBtn onClick={handleDetail} color="mdb-color darken-4">

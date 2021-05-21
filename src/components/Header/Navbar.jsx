@@ -14,6 +14,10 @@ import {
 } from 'mdbreact';
 import { BrowserRouter as Router } from 'react-router-dom';
 
+const styles = {
+  full_width:{width:'100%'},
+  half_width:{width:'50%'}
+}
 const NavbarPage = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,7 +29,7 @@ const NavbarPage = (props) => {
 
   const handleSetSearch = async (e) => {
     setSearch(e.target.value)
-    if(e.target.value.length >=3){
+    if(e.target.value.length >= 2){
       await props.setSearch(e.target.value, type)
     } else if(e.target.value.length === 0){
       await props.setSearch(e.target.value, type)
@@ -49,9 +53,9 @@ const NavbarPage = (props) => {
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isOpen} navbar>
           <MDBNavbarNav >
-            <MDBNavItem style={{width:'50%'}}>
+            <MDBNavItem style={styles.half_width}>
               <MDBFormInline  waves>
-                <div style={{width:'100%'}} 
+                <div style={styles.full_width} 
                 className="md-form my-0"
                 >
                   <input
@@ -62,7 +66,7 @@ const NavbarPage = (props) => {
                     onKeyDown={handleSetSearch}
                     placeholder="Search"
                     aria-label="Search"
-                    style={{width:'100%'}}
+                    style={styles.full_width}
                   />
                 </div>
               </MDBFormInline>
